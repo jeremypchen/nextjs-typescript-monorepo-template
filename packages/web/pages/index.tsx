@@ -1,37 +1,45 @@
-import { Container, Flex } from '@chakra-ui/react'
-import { useDisclosure } from '@chakra-ui/react'
-
-import { createContext } from 'react'
-
+import { Flex, Text } from '@chakra-ui/react'
+import { GetStaticProps } from 'next'
 import type { NextPage } from 'next'
 
-const Landing: NextPage = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+import WithContext from '../context/WithContext'
 
+const InitialPage: NextPage = () => {
   return (
-    <Container maxW={'1920px'} minH={'100vh'} p={0}>
-      <Flex h={{ base: 'auto' }} direction={'column'}>
-        <ModalContext.Provider
-          value={{
-            isOpen,
-            onOpen,
-            onClose,
-          }}
-        ></ModalContext.Provider>
+    <WithContext>
+      <Flex
+        direction="column"
+        minHeight="100vh"
+        maxWidth="1920px"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Text>Initial Page</Text>
       </Flex>
-    </Container>
+    </WithContext>
   )
 }
 
-// CONTEXT
-export type ModalContextType = {
-  isOpen: boolean
-  onOpen: () => void
-  onClose: () => void
+export const getStaticProps: GetStaticProps = () => {
+  // const data = fetchProps()
+  const data = {
+    data: {},
+  }
+
+  return {
+    props: {
+      data,
+    },
+  }
 }
 
-export const ModalContext = createContext<ModalContextType | undefined>(
-  undefined!
-)
+// export const getStaticPaths: GetStaticPaths = () => {
+//   // const data = fetchProps()
 
-export default Landing
+//   return {
+//     paths: [],
+//     fallback: false,
+//   }
+// }
+
+export default InitialPage

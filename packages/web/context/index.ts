@@ -18,3 +18,13 @@ export type AuthContextType = {
 export const AuthContext = createContext<AuthContextType | undefined>(
   undefined!
 )
+
+export type ModalContextType = {
+  isOpen: boolean
+  onOpen: () => void
+  onClose: () => void
+}
+
+export const ModalContext = createContext<ModalContextType | undefined>(
+  undefined!
+)
